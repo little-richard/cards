@@ -11,17 +11,16 @@ type Deck struct {
 }
 
 func (d Deck) newDeck() Deck {
-	deck := Deck{}
 	values := Value("")
 	suits := Suit("")
 
 	for _, suit := range suits.get() {
 		for _, value := range values.get() {
-			deck = deck.addCard(Card{Suit: suit, Value: value})
+			d = d.addCard(Card{Suit: suit, Value: value})
 		}
 	}
 
-	return deck
+	return d
 }
 
 func (d Deck) addCard(newCard Card) Deck {
@@ -34,6 +33,7 @@ func (d Deck) print() {
 	for _, card := range d.Cards {
 		fmt.Printf("%s of %s\n", card.Value, card.Suit)
 	}
+
 }
 
 func (d Deck) deal(deck Deck, handSize int) (Deck, Deck) {
@@ -51,7 +51,27 @@ func (d Deck) toString() string {
 }
 
 func (d Deck) saveToFile(fileName string) error {
-
 	return ioutil.WriteFile(fileName, []byte(d.toString()), 0666)
+}
+
+func (d Deck) newDeckFromFile(filename string) (Deck, error) {
+	bs, err := ioutil.ReadFile(filename)
+
+	if err != nil {
+		return d, err
+	}
+
+	fileStrData := string(bs)
+
+	cardsStrSplit := strings.Split(fileStrData, ",")
+
+	for _, cardStr := range cardsStrSplit {
+		cardSplit := strings.Split(cardStr, " of ")
+		value := Value(cardSplit[0])
+		suit := Suit(cardSplit[1])
+		d = d.addCard(Card{Value: value, Suit: suit})
+	}
+
+	return d, err
 
 }
