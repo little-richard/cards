@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"io/ioutil"
+	"strings"
+)
 
 type Deck struct {
 	Cards []Card
@@ -32,6 +36,22 @@ func (d Deck) print() {
 	}
 }
 
-func deal(deck Deck, handSize int) (Deck, Deck) {
+func (d Deck) deal(deck Deck, handSize int) (Deck, Deck) {
 	return Deck{deck.Cards[:handSize]}, Deck{deck.Cards[handSize:]}
+}
+
+func (d Deck) toString() string {
+	var cardsStr []string
+
+	for _, card := range d.Cards {
+		cardsStr = append(cardsStr, card.toString())
+	}
+
+	return strings.Join(cardsStr, ",")
+}
+
+func (d Deck) saveToFile(fileName string) error {
+
+	return ioutil.WriteFile(fileName, []byte(d.toString()), 0666)
+
 }

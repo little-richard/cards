@@ -13,3 +13,7 @@ const (
 func (s Suit) get() []Suit {
 	return []Suit{Spades, Diamonds, Hearts, Clubs}
 }
+
+func (s Suit) toString() string {
+	return string(s)
+}

@@ -22,3 +22,7 @@ const (
 func (v Value) get() []Value {
 	return []Value{Ace, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Jack, Queen, King}
 }
+
+func (v Value) toString() string {
+	return string(v)
+}

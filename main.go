@@ -1,6 +1,6 @@
 package main
 
-import "fmt"
+import "log"
 
 func main() {
 
@@ -8,13 +8,23 @@ func main() {
 
 	deck = deck.newDeck()
 
-	hand, remainingDeck := deal(deck, 5)
+	//hand, remainingDeck := deck.deal(deck, 5)
+	//
+	//fmt.Println("Hand:")
+	//hand.print()
+	//fmt.Println("\n\n")
+	//
+	//fmt.Println("Remaining deck:")
+	//remainingDeck.print()
+	//
+	//test := "Hi there!"
+	//
+	//fmt.Println([]byte(test))
 
-	fmt.Println("Hand:")
-	hand.print()
-	fmt.Println("\n\n")
+	err := deck.saveToFile("my_deck.txt")
 
-	fmt.Println("Remaining deck:")
-	remainingDeck.print()
+	if err != nil {
+		log.Fatal("Error: ", err)
+	}
 
 }
