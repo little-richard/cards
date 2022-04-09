@@ -1,11 +1,18 @@
 package main
 
+import "fmt"
+
 func main() {
 
 	deck := Deck{}
 
-	deck = deck.newDeckFromFile("my_deckss.txt")
+	deck = deck.newDeck()
 
 	deck.print()
 
+	fmt.Println("\n")
+
+	deck.shuffle()
+
+	deck.print()
 }
