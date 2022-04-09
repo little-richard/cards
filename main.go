@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 func main() {
 
 	deck := Deck{}
@@ -9,8 +7,6 @@ func main() {
 	deck = deck.newDeck()
 
 	deck.print()
-
-	fmt.Println("\n")
 
 	deck.shuffle()
 

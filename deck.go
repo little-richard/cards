@@ -90,3 +90,8 @@ func (d Deck) shuffle() {
 	}
 
 }
+
+func (d Deck) clear() Deck {
+	d.Cards = []Card{}
+	return d
+}
