@@ -6,6 +6,7 @@ import (
 	"log"
 	"math/rand"
 	"strings"
+	"time"
 )
 
 type Deck struct {
@@ -80,8 +81,11 @@ func (d Deck) newDeckFromFile(filename string) Deck {
 
 func (d Deck) shuffle() {
 
+	source := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(source)
+
 	for i := range d.Cards {
-		newPosition := rand.Intn(len(d.Cards))
+		newPosition := r.Intn(len(d.Cards))
 		d.Cards[i], d.Cards[newPosition] = d.Cards[newPosition], d.Cards[i]
 	}
 
