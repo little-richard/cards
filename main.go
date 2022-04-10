@@ -4,7 +4,7 @@ func main() {
 
 	deck := Deck{}
 
-	deck = deck.newDeck()
+	deck.newDeck()
 
 	deck.print()
 

@@ -13,7 +13,7 @@ const (
 func TestNewDeck(t *testing.T) {
 	deck := Deck{}
 
-	deck = deck.newDeck()
+	deck.newDeck()
 
 	length := len(deck.Cards)
 
@@ -38,9 +38,9 @@ func TestNewDeck(t *testing.T) {
 
 func TestClearDeckCards(t *testing.T) {
 	deck := Deck{}
-	deck = deck.newDeck()
+	deck.newDeck()
 
-	deck = deck.clear()
+	deck.clear()
 
 	length := len(deck.Cards)
 
@@ -54,7 +54,7 @@ func TestClearDeckCards(t *testing.T) {
 func TestSaveDeckFile(t *testing.T) {
 
 	deck := Deck{}
-	deck = deck.newDeck()
+	deck.newDeck()
 
 	length := len(deck.Cards)
 
@@ -79,12 +79,13 @@ func TestSaveDeckFile(t *testing.T) {
 func TestNewDeckFromFile(t *testing.T) {
 
 	deck := Deck{}
-	deck = deck.newDeck()
+	deck.newDeck()
 	err := deck.saveToFile(fileNameTesting)
 
-	deck = deck.clear()
+	deck.clear()
 
-	loadedDeck := deck.newDeckFromFile(fileNameTesting)
+	loadedDeck := Deck{}
+	loadedDeck.newDeckFromFile(fileNameTesting)
 
 	length := len(loadedDeck.Cards)
 

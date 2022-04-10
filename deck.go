@@ -13,22 +13,19 @@ type Deck struct {
 	Cards []Card
 }
 
-func (d Deck) newDeck() Deck {
+func (d *Deck) newDeck() {
 	values := Value("")
 	suits := Suit("")
 
 	for _, suit := range suits.get() {
 		for _, value := range values.get() {
-			d = d.addCard(Card{Suit: suit, Value: value})
+			d.addCard(Card{Suit: suit, Value: value})
 		}
 	}
-
-	return d
 }
 
-func (d Deck) addCard(newCard Card) Deck {
+func (d *Deck) addCard(newCard Card) {
 	d.Cards = append(d.Cards, newCard)
-	return d
 }
 
 func (d Deck) print() {
@@ -57,7 +54,7 @@ func (d Deck) saveToFile(fileName string) error {
 	return ioutil.WriteFile(fileName, []byte(d.toString()), 0666)
 }
 
-func (d Deck) newDeckFromFile(filename string) Deck {
+func (d *Deck) newDeckFromFile(filename string) {
 	bs, err := ioutil.ReadFile(filename)
 
 	if err != nil {
@@ -72,11 +69,8 @@ func (d Deck) newDeckFromFile(filename string) Deck {
 		cardSplit := strings.Split(cardStr, " of ")
 		value := Value(cardSplit[0])
 		suit := Suit(cardSplit[1])
-		d = d.addCard(Card{Value: value, Suit: suit})
+		d.addCard(Card{Value: value, Suit: suit})
 	}
-
-	return d
-
 }
 
 func (d Deck) shuffle() {
@@ -91,7 +85,6 @@ func (d Deck) shuffle() {
 
 }
 
-func (d Deck) clear() Deck {
+func (d *Deck) clear() {
 	d.Cards = []Card{}
-	return d
 }
